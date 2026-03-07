@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptimalCraft | Staff Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-orange: #ff6600;
+            --deep-red: #cc2b00;
+            --autumn-gold: #ff9d00;
+            --glow: 0 0 20px rgba(255, 102, 0, 0.7);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Rajdhani', sans-serif;
+            background: black;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Capa de fondo con overlay */
+        .background-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(43, 27, 18, 0.8) 0%, rgba(0, 0, 0, 0.7) 100%), 
+                        url('https://media.forgecdn.net/attachments/description/1368791/description_41ba0819-a458-4ed3-a44e-ed4af39d9009.png');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+        }
+
+        /* Animación de escaneo futurista */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--neon-orange);
+            opacity: 0.1;
+            box-shadow: var(--glow);
+            animation: scan 4s linear infinite;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+
+        /* Header Mejorado */
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.6);
+            border-bottom: 2px solid var(--neon-orange);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-orange);
+            text-shadow: 0 0 10px var(--deep-red);
+            margin: 0 20px 0 0;
+            font-size: 2.2rem;
+            letter-spacing: 5px;
+        }
+
+        .logo-img {
+            height: 60px;
+            filter: drop-shadow(0 0 8px var(--neon-orange));
+            transition: 0.5s;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+        }
+
+        .glass-box {
+            background: rgba(20, 10, 5, 0.9);
+            padding: 50px;
+            border-radius: 5px;
+            border-left: 5px solid var(--neon-orange);
+            border-right: 1px solid var(--autumn-gold);
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            text-align: center;
+            width: 90%;
+            max-width: 450px;
+            transition: 0.5s;
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            color: var(--autumn-gold);
+        }
+
+        /* Inputs Neón */
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 102, 0, 0.05);
+            border: 1px solid rgba(255, 102, 0, 0.3);
+            border-bottom: 2px solid var(--neon-orange);
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            margin-bottom: 25px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input[type="password"]:focus {
+            background: rgba(255, 102, 0, 0.1);
+            box-shadow: inset 0 0 10px rgba(255,102,0,0.2);
+            border-bottom: 2px solid #fff;
+        }
+
+        /* Botones Estilo Cyberpunk */
+        .btn {
+            position: relative;
+            background: transparent;
+            color: white;
+            border: 1px solid var(--neon-orange);
+            padding: 18px 25px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            width: 100%;
+            margin: 10px 0;
+            display: block;
+            text-decoration: none;
+            overflow: hidden;
+            transition: 0.4s;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before { left: 100%; }
+
+        .btn:hover {
+            background: var(--neon-orange);
+            box-shadow: var(--glow);
+            color: black;
+            transform: translateY(-3px);
+        }
+
+        .hidden { display: none !important; }
+
+        /* Efecto de partículas de otoño (simples cuadrados/píxeles) */
+        .particle {
+            position: absolute;
+            background: var(--neon-orange);
+            pointer-events: none;
+            opacity: 0.5;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-overlay"></div>
+    <div id="particles-container"></div>
+
+    <header>
+        <h1>OptimalCraft Network</h1>
+        <img src="imagen.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
+    </header>
+
+    <div class="container">
+        <div id="login-section" class="glass-box">
+            <h2>2FA AUTENTIFICACION DE STAFF-TEAM</h2>
+            <input type="password" id="pass-input" placeholder="PON LA CONTRASEÑA">
+            <button class="btn" onclick="checkPassword()">LOGIN</button>
+        </div>
+
+        <div id="staff-section" class="glass-box hidden">
+            <h2 style="color: #E63F0E;">ACCESO CONCEDIDO</h2>
+            <a href="https://docs.google.com/document/d/1bUGwukzoYvFJviaUB2NsaLOLLVBByi4ikZP41EcnOG0/edit?usp=sharing" target="_blank" class="btn">• Normativas Staff-Team •</a>
+            <a href="https://docs.google.com/spreadsheets/d/1ka38cZqSxF8E9_f7tG0pccYaU7OO-P9rboCw3RB6iXQ/edit?usp=sharing" target="_blank" class="btn">• Staff List •</a>
+        </div>
+    </div>
+
+    <script>
+        // 1. Lógica de Password
+        function checkPassword() {
+            const secret = "0PT1M4LCR4FT-ST4FFGR0UP0OFFICIAL";
+            const input = document.getElementById('pass-input').value;
+
+            if (input === secret) {
+                document.getElementById('login-section').classList.add('hidden');
+                document.getElementById('staff-section').classList.remove('hidden');
+            } else {
+                alert("Incorrecto.");
+            }
+        }
+
+        // 2. Anti-DevTools mejorado (Sin bug de refresco constante)
+        // Detecta si la consola está abierta mediante una función debugeable
+        (function() {
+            const check = function() {
+                const start = new Date().getTime();
+                debugger;
+                const end = new Date().getTime();
+                if (end - start > 100) {
+                    window.location.reload();
+                }
+            };
+            setInterval(check, 2000);
+        })();
+
+        // 3. Crear partículas de "Otoño Neón"
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            for(let i = 0; i < 20; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                const size = Math.random() * 5 + 2 + 'px';
+                p.style.width = size;
+                p.style.height = size;
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.top = -10 + 'px';
+                p.style.animationDuration = Math.random() * 3 + 4 + 's';
+                p.style.opacity = Math.random();
+                container.appendChild(p);
+            }
+        }
+        createParticles();
+
+        // Bloquear clic derecho
+        document.addEventListener('contextmenu', e => e.preventDefault());
+    </script>
+</body>
+</html>
