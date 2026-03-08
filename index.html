@@ -80,26 +80,26 @@
 
     <div class="container">
         <div id="login-section" class="glass-box">
-            <h2 id="status-text">CARGANDO PROTOCOLOS...</h2>
+            <h2 id="status-text">Cargando Pagina Web....</h2>
             <div id="login-controls" class="hidden">
                 <input type="password" id="pass-input" placeholder="ACCESS KEY">
-                <button class="btn" onclick="checkPassword()">ENTRAR AL PANEL</button>
+                <button class="btn" onclick="checkPassword()">LOGIN</button>
             </div>
         </div>
 
         <div id="staff-section" class="glass-box hidden">
-            <h2 style="color: #00ff00;">STAFF PANEL</h2>
+            <h2 style="color: #ff4000;">STAFF DOCUMENTS</h2>
             <a href="https://docs.google.com/document/d/1bUGwukzoYvFJviaUB2NsaLOLLVBByi4ikZP41EcnOG0/edit?usp=sharing" target="_blank" class="btn">• Normativas Staff-Team •</a>
             <a href="https://docs.google.com/spreadsheets/d/1ka38cZqSxF8E9_f7tG0pccYaU7OO-P9rboCw3RB6iXQ/edit?usp=sharing" target="_blank" class="btn">• Staff List •</a>
         </div>
 
         <div id="owner-section" class="glass-box owner-border hidden">
-            <h2 style="color: var(--owner-cyan);">OWNER TERMINAL</h2>
+            <h2 style="color: var(--owner-orange);">Management Panel</h2>
             <a href="https://docs.google.com/document/d/1bUGwukzoYvFJviaUB2NsaLOLLVBByi4ikZP41EcnOG0/edit?usp=sharing" target="_blank" class="btn">• Normativas Staff-Team •</a>
             <a href="https://docs.google.com/spreadsheets/d/1ka38cZqSxF8E9_f7tG0pccYaU7OO-P9rboCw3RB6iXQ/edit?usp=sharing" target="_blank" class="btn">• Staff List •</a>
             <button id="demote-btn" class="btn btn-demote" onclick="generateNewPass()">⚠ DEMOTE SECURITY (GLOBAL) ⚠</button>
             <div id="pass-result-area" class="hidden">
-                <p style="font-size: 0.8rem; margin: 5px 0;">NUEVA CLAVE (Haz clic para copiar):</p>
+                <p style="font-size: 0.8rem; margin: 5px 0;">Nueva Contraseña</p>
                 <div id="new-pass-display" onclick="copyPass()"></div>
             </div>
         </div>
@@ -170,7 +170,7 @@
             } catch (e) {
                 alert("Error al conectar con JSONBin.");
             } finally {
-                btn.innerText = "⚠ DEMOTE SECURITY (GLOBAL) ⚠";
+                btn.innerText = "Demote Security";
                 btn.disabled = false;
             }
         }
@@ -207,4 +207,5 @@
     </script>
 </body>
 </html>
+
 
