@@ -10,7 +10,7 @@
             --neon-orange: #ff6600;
             --deep-red: #cc2b00;
             --autumn-gold: #ff9d00;
-            --owner-cyan: #00f2ff;
+            --owner-cyan: #ff4000;
             --glow: 0 0 20px rgba(255, 102, 0, 0.7);
         }
         * { box-sizing: border-box; }
@@ -82,8 +82,8 @@
         <div id="login-section" class="glass-box">
             <h2 id="status-text">Cargando Pagina Web....</h2>
             <div id="login-controls" class="hidden">
-                <input type="password" id="pass-input" placeholder="ACCESS KEY">
-                <button class="btn" onclick="checkPassword()">LOGIN</button>
+                <input type="password" id="pass-input" placeholder="Pon La Contraseña.">
+                <button class="btn" onclick="checkPassword()">Login</button>
             </div>
         </div>
 
@@ -119,7 +119,7 @@
                 });
                 const data = await response.json();
                 CURRENT_STAFF_PASS = data.record.staff_password;
-                document.getElementById('status-text').innerText = "SEGURIDAD SINCRONIZADA";
+                document.getElementById('status-text').innerText = "OPTIMALCRAFT LOGIN";
                 document.getElementById('login-controls').classList.remove('hidden');
             } catch (e) {
                 document.getElementById('status-text').innerText = "ERROR DE RED";
@@ -141,11 +141,11 @@
 
         async function generateNewPass() {
             const btn = document.getElementById('demote-btn');
-            btn.innerText = "SOBREESCRIBIENDO NUBE...";
+            btn.innerText = "";
             btn.disabled = true;
 
             const base = "0PT1M4LCR4FTST4FF";
-            let newPass = "";
+            let newPass = "Cambiando Contraseña...";
             for (let i = 0; i < base.length; i++) {
                 let r = Math.floor(Math.random() * 3);
                 if (r === 0) newPass += base[i].toLowerCase();
@@ -165,7 +165,7 @@
                     document.getElementById('new-pass-display').innerText = newPass;
                     document.getElementById('pass-result-area').classList.remove('hidden');
                     navigator.clipboard.writeText(newPass);
-                    alert("¡SEGURIDAD ACTUALIZADA GLOBALMENTE!");
+                    alert("Contraseña Cambiada.");
                 }
             } catch (e) {
                 alert("Error al conectar con JSONBin.");
@@ -177,7 +177,7 @@
 
         function copyPass() {
             navigator.clipboard.writeText(document.getElementById('new-pass-display').innerText);
-            alert("Copiada al portapapeles.");
+            alert("Contraseña Copiada");
         }
 
         (function() {
@@ -207,6 +207,7 @@
     </script>
 </body>
 </html>
+
 
 
 
