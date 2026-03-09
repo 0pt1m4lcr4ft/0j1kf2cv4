@@ -3,151 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OptimalCraft |Auth Panel ©</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <title>OptimalCraft</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --neon-orange: #ff6600;
-            --deep-red: #cc2b00;
-            --owner-cyan: #00e5ff;
-            --modern-white: #f8f9fa;
-            --modern-dark: #212529;
-            --glow: 0 0 15px rgba(255, 102, 0, 0.6);
-            --owner-glow: 0 0 20px rgba(0, 229, 255, 0.6);
+            --mc-bg: #f0f0f0;
+            --mc-dirt: #4b3b2a;
+            --mc-green: #3fb33f;
+            --mc-button: #bebebe;
+            --mc-button-hover: #e0e0e0;
+            --white: #ffffff;
+            --danger: #ff4747;
+            --text: #2c2c2c;
+            --border-pixel: 4px solid #000;
         }
-        * { box-sizing: border-box; }
-        body {
-            margin: 0; padding: 0; font-family: 'Rajdhani', sans-serif;
-            background: #e9ecef; height: 100vh; display: flex; flex-direction: column;
-            color: var(--modern-dark); overflow-x: hidden; transition: background 0.5s;
-        }
-        body.auth-mode {
-            background: black; color: white; overflow: hidden;
-        }
-        .background-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(43, 27, 18, 0.9) 0%, rgba(0, 0, 0, 0.8) 100%), 
-                        url('https://media.forgecdn.net/attachments/description/1368791/description_41ba0819-a458-4ed3-a44e-ed4af39d9009.png');
-            background-size: cover; background-position: center; z-index: -2;
-            display: none;
-        }
-        body.auth-mode .background-overlay { display: block; }
-        
-        header {
-            display: flex; justify-content: center; align-items: center;
-            padding: 20px; background: white;
-            border-bottom: 3px solid var(--neon-orange);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10;
-        }
-        body.auth-mode header {
-            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px);
-            border-bottom: 2px solid var(--neon-orange); box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-        }
-        h1 {
-            font-family: 'Orbitron', sans-serif; color: var(--modern-dark);
-            margin: 0 15px 0 0; font-size: 2rem; letter-spacing: 2px;
-        }
-        body.auth-mode h1 { color: var(--neon-orange); text-shadow: 0 0 10px var(--deep-red); letter-spacing: 5px; }
-        
-        .container { flex-grow: 1; display: flex; justify-content: center; align-items: center; padding: 20px; z-index: 5; }
-        
-        /* Cajas de diseño */
-        .box {
-            background: white; padding: 35px; border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 550px;
-            text-align: center;
-        }
-        .glass-box {
-            background: rgba(15, 10, 5, 0.95); padding: 40px; border-radius: 5px;
-            border-left: 4px solid var(--neon-orange); border-right: 1px solid var(--neon-orange);
-            box-shadow: 0 0 40px rgba(0,0,0,0.8); text-align: center; color: white;
-        }
-        .owner-border { border-left-color: var(--owner-cyan); border-right-color: var(--owner-cyan); box-shadow: var(--owner-glow); }
-        
-        /* Inputs y Botones */
-        input, select {
-            width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ced4da;
-            border-radius: 4px; font-family: 'Rajdhani', sans-serif; font-size: 1.1rem;
-            outline: none; transition: 0.3s;
-        }
-        input:focus, select:focus { border-color: var(--neon-orange); }
-        
-        body.auth-mode input {
-            background: rgba(255, 102, 0, 0.05); border: 1px solid rgba(255, 102, 0, 0.3);
-            border-bottom: 2px solid var(--neon-orange); color: white; font-family: 'Orbitron', sans-serif;
-            text-align: center;
-        }
-        
-        .btn {
-            background: var(--modern-dark); color: white; border: none; border-radius: 4px;
-            padding: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase;
-            width: 100%; margin: 8px 0; display: block; text-decoration: none; transition: 0.3s;
-            font-size: 1.1rem;
-        }
-        .btn:hover { background: var(--neon-orange); color: white; }
-        
-        body.auth-mode .btn { background: transparent; border: 1px solid var(--neon-orange); }
-        body.auth-mode .btn:hover { background: var(--neon-orange); color: black; box-shadow: var(--glow); transform: translateY(-2px); }
-        
-        .btn-danger { background: #dc3545; color: white; border-color: #dc3545; }
-        .btn-danger:hover { background: #c82333; }
-        
-        .btn-owner { border-color: var(--owner-cyan) !important; color: var(--owner-cyan) !important; }
-        .btn-owner:hover { background: var(--owner-cyan) !important; color: black !important; box-shadow: var(--owner-glow) !important; }
 
-        /* Permisos List */
-        .perm-list { text-align: left; margin-bottom: 20px; background: #f8f9fa; padding: 15px; border-radius: 4px; border: 1px solid #ddd; }
-        body.auth-mode .perm-list { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); }
-        .perm-item { display: flex; align-items: center; margin-bottom: 8px; }
-        .perm-item input { width: auto; margin: 0 10px 0 0; }
-        
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--mc-bg);
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); /* Textura sutil de cubos */
+            color: var(--text);
+            display: flex; flex-direction: column; min-height: 100vh;
+        }
+
+        /* Estilo Minecraft para Títulos */
+        .mc-font { font-family: 'VT323', monospace; text-transform: uppercase; }
+
+        header {
+            background: var(--white);
+            padding: 15px 30px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 4px solid #ddd;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.05);
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-img { width: 40px; height: 40px; image-rendering: pixelated; }
+
+        .container { flex-grow: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
+
+        /* Cajas de Interfaz */
+        .mc-card {
+            background: var(--white);
+            border: 4px solid #000;
+            padding: 30px;
+            width: 100%; max-width: 450px;
+            position: relative;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.1);
+        }
+
+        /* Botones Estilo Minecraft */
+        .mc-btn {
+            display: block; width: 100%;
+            padding: 12px; margin: 10px 0;
+            background: var(--mc-button);
+            border: 3px solid #000;
+            border-bottom-width: 6px;
+            color: #000; text-align: center;
+            text-decoration: none; cursor: pointer;
+            font-weight: bold; font-family: 'VT323', monospace; font-size: 1.5rem;
+            transition: all 0.1s;
+        }
+        .mc-btn:hover { background: var(--mc-button-hover); transform: translateY(-2px); }
+        .mc-btn:active { border-bottom-width: 3px; transform: translateY(2px); }
+        .mc-btn-green { background: var(--mc-green); color: white; }
+        .mc-btn-danger { background: var(--danger); color: white; }
+
+        input, select {
+            width: 100%; padding: 12px; margin-bottom: 15px;
+            border: 2px solid #000; border-radius: 0;
+            font-family: 'Inter', sans-serif; font-size: 1rem;
+        }
+
         .hidden { display: none !important; }
-        .error-text { color: #dc3545; font-weight: bold; margin-bottom: 15px; }
-        
-        /* Partículas (solo auth mode) */
-        .particle { position: absolute; background: var(--neon-orange); pointer-events: none; opacity: 0.4; animation: fall linear infinite; }
-        @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
+
+        /* Icono de Engranaje */
+        .settings-icon {
+            cursor: pointer; font-size: 24px; transition: transform 0.3s;
+        }
+        .settings-icon:hover { transform: rotate(90deg); }
+
+        /* Staff Chat UI */
+        #staff-chat-box {
+            height: 200px; overflow-y: auto; background: #eee;
+            padding: 10px; border: 2px solid #000; margin-bottom: 10px;
+            text-align: left; font-size: 0.9rem;
+        }
+
+        .perm-badge {
+            display: inline-block; padding: 2px 8px; background: #ddd;
+            font-size: 0.7rem; border-radius: 3px; margin: 2px;
+        }
+
     </style>
 </head>
-<body class="auth-mode" id="body-tag">
-
-    <div class="background-overlay"></div>
-    <div id="particles-container"></div>
+<body>
 
     <header>
-        <h1>OptimalCraft Network</h1>
+        <div class="logo-area">
+            <img src="https://minecraft.net/static/theme/img/favicon.ico" class="logo-img">
+            <h1 class="mc-font" style="margin:0; font-size: 1.8rem;">OptimalCraft Auth</h1>
+        </div>
+        <div id="user-nav" class="hidden">
+            <span id="display-name" style="margin-right: 15px; font-weight: bold;"></span>
+            <span class="settings-icon" onclick="showSettings()">⚙️</span>
+        </div>
     </header>
 
     <div class="container">
-        <div id="login-section" class="glass-box box">
-            <h2 id="status-text" style="color: var(--neon-orange);">ESTABLECIENDO CONEXIÓN...</h2>
-            <div id="login-controls" class="hidden">
-                <input type="email" id="email-input" placeholder="Correo Electrónico (Gmail)">
-                <input type="password" id="pass-input" placeholder="Contraseña">
-                <p id="login-error" class="error-text hidden">Esta cuenta no existe o datos incorrectos.</p>
-                <button class="btn" onclick="login()">Iniciar Sesión</button>
-            </div>
+        <div id="login-section" class="mc-card">
+            <h2 class="mc-font" style="text-align:center;">Iniciar Sesión</h2>
+            <input type="email" id="email-input" placeholder="Correo Electrónico">
+            <input type="password" id="pass-input" placeholder="Contraseña">
+            <button class="mc-btn mc-btn-green" onclick="login()">ENTRAR</button>
+            <p id="login-error" class="hidden" style="color: var(--danger); text-align: center;"></p>
         </div>
 
-        <div id="staff-section" class="box hidden">
-            <h2 style="color: var(--modern-dark); border-bottom: 2px solid var(--neon-orange); padding-bottom: 10px;">Panel de Control Staff</h2>
+        <div id="staff-section" class="mc-card hidden">
+            <h2 class="mc-font" style="margin-top:0;">Panel Principal</h2>
             <div id="staff-buttons"></div>
-            <div id="404-error" class="hidden" style="padding: 40px 0;">
-                <h1 style="color: #dc3545; font-size: 4rem; margin:0;">404</h1>
-                <h3>Acceso Denegado</h3>
-                <p>Tu cuenta tiene permiso de ver el panel, pero no tienes acceso a ninguna función.</p>
+            
+            <hr style="border: 1px solid #ddd; margin: 20px 0;">
+            <h3 class="mc-font">💬 Staff Chat Privado</h3>
+            <div id="staff-chat-box">
+                <div style="color: #666;">Sistema: Bienvenido al canal privado.</div>
             </div>
-            <button class="btn btn-danger" onclick="logout()" style="margin-top: 30px;">Cerrar Sesión</button>
+            <input type="text" id="chat-msg" placeholder="Escribir mensaje...">
+            
+            <button class="mc-btn" onclick="logout()" style="margin-top: 20px;">SALIR DEL JUEGO</button>
         </div>
 
-        <div id="admin-section" class="glass-box box owner-border hidden">
-            <h2 id="admin-title" style="color: var(--owner-cyan);">Management</h2>
-            <div id="admin-content"></div>
-            <button class="btn" onclick="backToPanel()" style="margin-top: 20px;">Volver al Panel</button>
+        <div id="settings-section" class="mc-card hidden">
+            <h2 class="mc-font">Configuración de Cuenta</h2>
+            <div id="settings-content">
+                </div>
+            <button class="mc-btn" onclick="backToPanel()">VOLVER</button>
         </div>
     </div>
 
     <script>
+        // --- CONFIGURACIÓN API (Mantenida de tu código) ---
         const BIN_ID = "69acbbedae596e708f6ae72b"; 
         const API_KEY = "$2a$10$Axc/bU98eP8gJ.xFYRIA8OL.1yGeVRU6tzUigKHgfKKKKo8QBiSyu"; 
         const URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
@@ -155,335 +153,110 @@
         let db = { users: [] };
         let currentUser = null;
 
-        // PERMISOS DISPONIBLES
-        const AVAILABLE_PERMS = [
-            { id: 'login.auth', label: 'Puede logearse' },
-            { id: 'panel.see', label: 'Puede ver el panel' },
-            { id: 'button.stafflist', label: 'Ver botón Staff List' },
-            { id: 'button.normativas', label: 'Ver botón Normativas' },
-            { id: 'button.createacc', label: 'Puede crear cuentas' },
-            { id: 'button.deleteacc', label: 'Puede eliminar cuentas' },
-            { id: 'button.addperm', label: 'Puede modificar permisos' },
-            { id: 'owner.auth', label: 'OWNER (Todos los permisos)' }
-        ];
-
-        // --- INICIALIZACIÓN ---
         async function loadDatabase() {
             try {
                 const response = await fetch(`${URL}/latest`, { headers: { "X-Master-Key": API_KEY } });
                 const data = await response.json();
-                
-                // Si la base de datos está vacía o es del formato viejo, la actualizamos
-                if (!data.record.users) {
-                    db.users = [{
-                        email: "owner@optimalcraft.com",
-                        password: "owner",
-                        permissions: ["owner.auth"]
-                    }];
-                    await saveDatabase();
-                } else {
-                    db = data.record;
-                }
-                
-                document.getElementById('status-text').innerText = "AUTENTICACIÓN REQUERIDA";
-                document.getElementById('login-controls').classList.remove('hidden');
-            } catch (e) {
-                document.getElementById('status-text').innerText = "ERROR DE CONEXIÓN A LA BASE DE DATOS";
-                document.getElementById('status-text').style.color = "red";
-            }
+                db = data.record;
+            } catch (e) { console.error("Error cargando DB"); }
         }
 
         async function saveDatabase() {
-            try {
-                await fetch(URL, {
-                    method: 'PUT',
-                    headers: { "Content-Type": "application/json", "X-Master-Key": API_KEY },
-                    body: JSON.stringify(db)
-                });
-            } catch (e) {
-                alert("Error al guardar en la base de datos.");
-            }
+            await fetch(URL, {
+                method: 'PUT',
+                headers: { "Content-Type": "application/json", "X-Master-Key": API_KEY },
+                body: JSON.stringify(db)
+            });
         }
 
-        // --- SISTEMA DE LOGIN ---
+        // --- LÓGICA DE LOGIN ---
         function login() {
             const email = document.getElementById('email-input').value.toLowerCase();
             const pass = document.getElementById('pass-input').value;
-            const errorTxt = document.getElementById('login-error');
-
             const user = db.users.find(u => u.email === email && u.password === pass);
 
-            if (!user) {
-                errorTxt.innerText = "Esta cuenta no existe o los datos son incorrectos.";
-                errorTxt.classList.remove('hidden');
-                return;
-            }
-
-            if (!hasPerm(user, 'login.auth') && !hasPerm(user, 'owner.auth')) {
-                errorTxt.innerText = "Tu cuenta no tiene permisos para iniciar sesión (login.auth).";
-                errorTxt.classList.remove('hidden');
-                return;
-            }
-
-            errorTxt.classList.add('hidden');
-            currentUser = user;
-            
-            // Cambiar estilos si es owner
-            if (hasPerm(currentUser, 'owner.auth')) {
-                document.getElementById('body-tag').classList.add('auth-mode');
+            if (user) {
+                currentUser = user;
+                document.getElementById('display-name').innerText = user.email.split('@')[0];
+                document.getElementById('user-nav').classList.remove('hidden');
+                loadPanel();
             } else {
-                document.getElementById('body-tag').classList.remove('auth-mode');
+                const err = document.getElementById('login-error');
+                err.innerText = "Datos incorrectos";
+                err.classList.remove('hidden');
             }
-
-            loadPanel();
         }
 
-        function logout() {
-            currentUser = null;
-            document.getElementById('email-input').value = "";
-            document.getElementById('pass-input').value = "";
-            document.getElementById('body-tag').classList.add('auth-mode');
-            switchSection('login-section');
+        function hasPerm(perm) {
+            return currentUser.permissions.includes("owner.auth") || currentUser.permissions.includes(perm);
         }
 
-        function hasPerm(user, perm) {
-            return user.permissions.includes("owner.auth") || user.permissions.includes(perm);
-        }
-
-        // --- RENDERIZADO DEL PANEL ---
         function loadPanel() {
             switchSection('staff-section');
             const btnContainer = document.getElementById('staff-buttons');
-            const error404 = document.getElementById('404-error');
             btnContainer.innerHTML = '';
-            
-            let hasAnyButton = false;
 
-            if (!hasPerm(currentUser, 'panel.see') && !hasPerm(currentUser, 'owner.auth')) {
-                 btnContainer.innerHTML = '<h3 style="color:red;">No tienes permiso panel.see</h3>';
-                 error404.classList.add('hidden');
-                 return;
+            if (hasPerm('button.normativas')) {
+                btnContainer.innerHTML += `<a href="#" class="mc-btn">📚 NORMATIVAS</a>`;
             }
-
-            if (hasPerm(currentUser, 'button.normativas')) {
-                btnContainer.innerHTML += `<a href="https://docs.google.com/document/d/1bUGwukzoYvFJviaUB2NsaLOLLVBByi4ikZP41EcnOG0/edit" target="_blank" class="btn">📚 Normativas Staff-Team</a>`;
-                hasAnyButton = true;
-            }
-            if (hasPerm(currentUser, 'button.stafflist')) {
-                btnContainer.innerHTML += `<a href="https://docs.google.com/spreadsheets/d/1ka38cZqSxF8E9_f7tG0pccYaU7OO-P9rboCw3RB6iXQ/edit" target="_blank" class="btn">📋 Staff List</a>`;
-                hasAnyButton = true;
-            }
-            if (hasPerm(currentUser, 'button.createacc')) {
-                btnContainer.innerHTML += `<button class="btn" style="background:#28a745;" onclick="showCreateAccount()">➕ Crear Cuenta</button>`;
-                hasAnyButton = true;
-            }
-            if (hasPerm(currentUser, 'button.deleteacc')) {
-                btnContainer.innerHTML += `<button class="btn btn-danger" onclick="showDeleteAccount()">🗑️ Eliminar Cuenta</button>`;
-                hasAnyButton = true;
-            }
-            if (hasPerm(currentUser, 'button.addperm')) {
-                btnContainer.innerHTML += `<button class="btn" style="background:#17a2b8;" onclick="showManagePerms()">⚙️ Gestionar Permisos</button>`;
-                hasAnyButton = true;
-            }
-
-            if (!hasAnyButton) {
-                error404.classList.remove('hidden');
-            } else {
-                error404.classList.add('hidden');
-            }
-            
-            // Si es owner, la caja debe parecer de owner
-            const staffBox = document.getElementById('staff-section');
-            if (hasPerm(currentUser, 'owner.auth')) {
-                staffBox.classList.add('glass-box', 'owner-border');
-                staffBox.classList.remove('box');
-            } else {
-                staffBox.classList.add('box');
-                staffBox.classList.remove('glass-box', 'owner-border');
+            if (hasPerm('button.stafflist')) {
+                btnContainer.innerHTML += `<a href="#" class="mc-btn">📋 STAFF LIST</a>`;
             }
         }
 
-        // --- FUNCIONES DE ADMINISTRACIÓN ---
+        // --- SECCIÓN DE CONFIGURACIÓN (REQUERIMIENTO) ---
+        function showSettings() {
+            switchSection('settings-section');
+            const content = document.getElementById('settings-content');
+            content.innerHTML = `<p><strong>Email:</strong> ${currentUser.email}</p>`;
+            
+            // Verificar permiso configuration.access
+            if (hasPerm('configuration.access')) {
+                content.innerHTML += `
+                    <div style="border: 1px solid #ccc; padding: 10px; margin-top: 10px;">
+                        <h4 class="mc-font">Cambiar Contraseña</h4>
+                        <input type="password" id="new-pass" placeholder="Nueva Contraseña">
+                        <button class="mc-btn mc-btn-green" onclick="updatePassword()">ACTUALIZAR</button>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <button class="mc-btn mc-btn-danger" onclick="deleteOwnAccount()">ELIMINAR CUENTA</button>
+                    </div>
+                `;
+            } else {
+                content.innerHTML += `<p style="color:red;">No tienes permiso para modificar esta cuenta (configuration.access).</p>`;
+            }
+        }
+
+        async function updatePassword() {
+            const newPass = document.getElementById('new-pass').value;
+            if (newPass.length < 4) return alert("Contraseña muy corta");
+            
+            currentUser.password = newPass;
+            await saveDatabase();
+            alert("Contraseña actualizada con éxito.");
+        }
+
+        async function deleteOwnAccount() {
+            if (confirm("¿ESTÁS SEGURO? Esta acción no se puede deshacer.")) {
+                db.users = db.users.filter(u => u.email !== currentUser.email);
+                await saveDatabase();
+                location.reload();
+            }
+        }
+
+        // --- UTILIDADES ---
         function switchSection(id) {
-            ['login-section', 'staff-section', 'admin-section'].forEach(sec => {
-                document.getElementById(sec).classList.add('hidden');
+            ['login-section', 'staff-section', 'settings-section'].forEach(s => {
+                document.getElementById(s).classList.add('hidden');
             });
             document.getElementById(id).classList.remove('hidden');
         }
 
-        function backToPanel() { loadPanel(); }
+        function backToPanel() { switchSection('staff-section'); }
 
-        // CREAR CUENTA
-        function showCreateAccount() {
-            document.getElementById('body-tag').classList.remove('auth-mode'); // Estilo blanco
-            document.getElementById('admin-section').className = 'box'; // Estilo blanco
-            document.getElementById('admin-title').innerText = "Crear Nueva Cuenta";
-            document.getElementById('admin-title').style.color = "var(--modern-dark)";
-            
-            document.getElementById('admin-content').innerHTML = `
-                <input type="email" id="new-acc-email" placeholder="Correo (Gmail)">
-                <input type="text" id="new-acc-pass" placeholder="Contraseña">
-                <button class="btn" style="background:#28a745;" onclick="executeCreateAccount()">Crear Cuenta</button>
-                <p id="admin-msg" class="error-text hidden"></p>
-            `;
-            switchSection('admin-section');
-        }
+        function logout() { location.reload(); }
 
-        async function executeCreateAccount() {
-            const email = document.getElementById('new-acc-email').value.toLowerCase();
-            const pass = document.getElementById('new-acc-pass').value;
-            const msg = document.getElementById('admin-msg');
-
-            if (!email || !pass) { msg.innerText = "Rellena todos los campos."; msg.classList.remove('hidden'); return; }
-            if (db.users.find(u => u.email === email)) { msg.innerText = "Esta cuenta ya existe."; msg.classList.remove('hidden'); return; }
-
-            // Crea cuenta básica sin permisos, debe dárselos alguien con addperm
-            db.users.push({ email: email, password: pass, permissions: ['login.auth'] });
-            
-            msg.innerText = "Guardando..."; msg.style.color = "black"; msg.classList.remove('hidden');
-            await saveDatabase();
-            alert("Cuenta creada con éxito.");
-            backToPanel();
-        }
-
-        // ELIMINAR CUENTA
-        function showDeleteAccount() {
-            document.getElementById('body-tag').classList.remove('auth-mode');
-            document.getElementById('admin-section').className = 'box';
-            document.getElementById('admin-title').innerText = "Eliminar Cuenta";
-            document.getElementById('admin-title').style.color = "var(--modern-dark)";
-            
-            let options = db.users.map(u => `<option value="${u.email}">${u.email}</option>`).join('');
-            
-            document.getElementById('admin-content').innerHTML = `
-                <select id="del-acc-email">${options}</select>
-                <button class="btn btn-danger" onclick="executeDeleteAccount()">Eliminar Permanentemente</button>
-            `;
-            switchSection('admin-section');
-        }
-
-        async function executeDeleteAccount() {
-            const email = document.getElementById('del-acc-email').value;
-            if (email === currentUser.email) { alert("No puedes eliminar tu propia cuenta."); return; }
-            
-            const userToDelete = db.users.find(u => u.email === email);
-            if (hasPerm(userToDelete, 'owner.auth') && !hasPerm(currentUser, 'owner.auth')) {
-                alert("No puedes eliminar a un Owner."); return;
-            }
-
-            if (confirm(`¿Estás seguro de eliminar ${email}?`)) {
-                db.users = db.users.filter(u => u.email !== email);
-                await saveDatabase();
-                alert("Cuenta eliminada.");
-                backToPanel();
-            }
-        }
-
-        // GESTIONAR PERMISOS
-        function showManagePerms() {
-            // Si el usuario actual es owner, se ve modo oscuro/neon
-            if(hasPerm(currentUser, 'owner.auth')){
-                document.getElementById('body-tag').classList.add('auth-mode');
-                document.getElementById('admin-section').className = 'glass-box box owner-border';
-                document.getElementById('admin-title').style.color = "var(--owner-cyan)";
-            } else {
-                document.getElementById('body-tag').classList.remove('auth-mode');
-                document.getElementById('admin-section').className = 'box';
-                document.getElementById('admin-title').style.color = "var(--modern-dark)";
-            }
-            
-            document.getElementById('admin-title').innerText = "Gestionar Permisos";
-            
-            let options = '<option value="">Selecciona un usuario...</option>';
-            db.users.forEach(u => {
-                options += `<option value="${u.email}">${u.email}</option>`;
-            });
-
-            document.getElementById('admin-content').innerHTML = `
-                <select id="perm-user-select" onchange="loadUserPerms()">${options}</select>
-                <div id="perms-container" class="perm-list hidden"></div>
-                <button id="save-perms-btn" class="btn hidden" onclick="executeSavePerms()">Guardar Permisos</button>
-            `;
-            switchSection('admin-section');
-        }
-
-        function loadUserPerms() {
-            const email = document.getElementById('perm-user-select').value;
-            const container = document.getElementById('perms-container');
-            const saveBtn = document.getElementById('save-perms-btn');
-            
-            if (!email) { container.classList.add('hidden'); saveBtn.classList.add('hidden'); return; }
-
-            const targetUser = db.users.find(u => u.email === email);
-            
-            // Bloqueo: No puedes editarte a ti mismo, ni editar a un owner si tú no lo eres
-            if (email === currentUser.email) {
-                container.innerHTML = "<p style='color:red;'>No puedes editar tus propios permisos.</p>";
-                container.classList.remove('hidden'); saveBtn.classList.add('hidden'); return;
-            }
-            if (hasPerm(targetUser, 'owner.auth') && !hasPerm(currentUser, 'owner.auth')) {
-                container.innerHTML = "<p style='color:red;'>No tienes autoridad para editar a un Owner.</p>";
-                container.classList.remove('hidden'); saveBtn.classList.add('hidden'); return;
-            }
-
-            let html = "";
-            AVAILABLE_PERMS.forEach(perm => {
-                const isChecked = targetUser.permissions.includes(perm.id) ? "checked" : "";
-                // Solo un owner puede dar/quitar el permiso 'owner.auth'
-                const isDisabled = (perm.id === 'owner.auth' && !hasPerm(currentUser, 'owner.auth')) ? "disabled" : "";
-                
-                html += `
-                    <label class="perm-item">
-                        <input type="checkbox" class="perm-checkbox" value="${perm.id}" ${isChecked} ${isDisabled}>
-                        ${perm.label}
-                    </label>
-                `;
-            });
-
-            container.innerHTML = html;
-            container.classList.remove('hidden');
-            saveBtn.classList.remove('hidden');
-            if(hasPerm(currentUser, 'owner.auth')) saveBtn.classList.add('btn-owner');
-        }
-
-        async function executeSavePerms() {
-            const email = document.getElementById('perm-user-select').value;
-            const targetUser = db.users.find(u => u.email === email);
-            
-            const checkboxes = document.querySelectorAll('.perm-checkbox');
-            let newPerms = [];
-            checkboxes.forEach(cb => {
-                if (cb.checked) newPerms.push(cb.value);
-            });
-
-            targetUser.permissions = newPerms;
-            document.getElementById('save-perms-btn').innerText = "Guardando...";
-            await saveDatabase();
-            alert("Permisos actualizados correctamente.");
-            backToPanel();
-        }
-
-        // --- EFECTOS VISUALES ---
-        function createParticles() {
-            const container = document.getElementById('particles-container');
-            for(let i = 0; i < 15; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                const size = Math.random() * 4 + 2 + 'px';
-                p.style.width = p.style.height = size;
-                p.style.left = Math.random() * 100 + 'vw';
-                p.style.top = '-10px';
-                p.style.animationDuration = Math.random() * 3 + 5 + 's';
-                container.appendChild(p);
-            }
-        }
-        
-        // Anti Dev-Tools / Click Derecho (Opcional, de tu código original)
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        
-        createParticles();
         loadDatabase();
     </script>
 </body>
 </html>
-
